@@ -10,6 +10,7 @@ const debug = require("debug")("line-pay:bot");
 const fs = require("fs");
 const queryString = require('query-string');
 const PayTransaction = require("./pay_transaction");
+const OrderedItem = require("./ordered_item");
 
 // LINE Messaging API SDK　の初期化
 const lineBot = require("@line/bot-sdk");
@@ -394,6 +395,8 @@ async function doPayRequest(event, userId, pay, useCheckout) {
         debug(reservation);
         // Save pay transaction information
         const tran = await registPayTransaction(orderId, userId, options, reservation.transactionId);
+        // Save ordered item
+        registOrderedItems(orderId, userId, options);
         // Reset user cart
         resetUserCart(userId)
         // LINE Pay 決済用メッセージをリプライ送信する
@@ -411,7 +414,7 @@ async function doPayRequest(event, userId, pay, useCheckout) {
 
 // 決済情報をkintone に保存する
 async function registPayTransaction(orderId, userId, payOptions, transactionId) {
-    debug(`postPayTransaction function called! orderId: ${orderId}; userId: ${userId}`);
+    debug(`registPayTransaction function called! orderId: ${orderId}; userId: ${userId}`);
     debug(`payOptions : ${JSON.stringify(payOptions)}`);
     let title = payOptions.packages[0].products[0].name;
     if (payOptions.packages[0].products.length > 1) {
@@ -422,6 +425,19 @@ async function registPayTransaction(orderId, userId, payOptions, transactionId) 
         orderId, userId, title, amount, transactionId
     );
     return tran;
+}
+
+function registOrderedItems(orderId, userId, payOptions) {
+    debug(`registOrderedItems function called! orderId: ${orderId}; userId: ${userId}`);
+    debug(`payOptions : ${JSON.stringify(payOptions)}`);
+    const products = payOptions.packages[0].products;
+    products.map((product) => {
+        debug(`ordered item : ${JSON.stringify(product)}`);
+        OrderedItem.registOrderedItem(
+            orderId, userId, product.id, product.name, product.price, product.quantity
+        );
+    })
+
 }
 
 // 決済開始用メッセージを生成する

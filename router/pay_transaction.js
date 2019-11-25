@@ -3,9 +3,9 @@ const debug = require("debug")("line-pay:pay_transaction");
 const kintone = require('@kintone/kintone-js-sdk');
 const moment = require('moment');
 
-const DOMAIN_NAME = process.env.KINTONE_APP_DOMAIN_NAME;
-const API_TOKEN = process.env.KINTONE_APP_API_TOKEN;
-const APP_ID = process.env.KINTONE_APP_ID;
+const DOMAIN_NAME = process.env.KINTONE_DOMAIN_NAME;
+const API_TOKEN = process.env.KINTONE_TRANSACTION_APP_API_TOKEN;
+const APP_ID = process.env.KINTONE_TRANSACTION_APP_ID;
 
 const PAY_STATE_ORDERED = 'ORDERED';
 const PAY_STATE_PAYING = 'PAYING';
@@ -46,7 +46,7 @@ module.exports =  class PayTransaction {
 
     // kintone からPayTransaction に変換する
     static convertPayTransactionFromKintoneRecord(record) {
-        debug(`getTransaction called! OrderId: ${JSON.stringify(record, null, 4)}`);
+        debug(`convertPayTransactionFromKintoneRecord called! OrderId: ${JSON.stringify(record, null, 4)}`);
         const tran = new PayTransaction(record.order_id.value, record.user_id.value);
         tran.currency = record.currency.value;
         tran.title = record.title.value;
