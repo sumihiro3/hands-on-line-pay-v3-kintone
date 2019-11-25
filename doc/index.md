@@ -244,23 +244,23 @@ LINEアプリへのQRコードをLINEアプリで読み込んで友だち登録�
 #### Mac
 
 ```bash
-$ mkdir ~/line-pay-hands-on && cd ~/line-pay-hands-on
-$ git clone https://github.com/sumihiro3/hands-on-line-pay-v3.git
-$ cd hands-on-line-pay-v3
+$ mkdir ~/line-pay-kintone-hands-on && cd ~/line-pay-kintone-hands-on
+$ git clone https://github.com/sumihiro3/hands-on-line-pay-v3-kintone.git
+$ cd line-pay-kintone-hands-on
 ```
 
 #### Windows
 
 ```bat
-> mkdir c:¥tmp¥line-pay-hands-on
-> cd c:¥tmp¥line-pay-hands-on
-> git clone https://github.com/sumihiro3/hands-on-line-pay-v3.git
-> cd hands-on-line-pay-v3
+> mkdir c:¥tmp¥line-pay-kintone-hands-on
+> cd c:¥tmp¥line-pay-kintone-hands-on
+> git clone https://github.com/sumihiro3/hands-on-line-pay-v3-kintone.git
+> cd line-pay-kintone-hands-on
 ```
 
 #### git clone 出来ない場合はリポジトリ内容をZIPファイルでダウンロード
 
-git clone 出来ない場合は、[リポジトリのページ](https://github.com/sumihiro3/hands-on-line-pay-v3.git)にアクセスして、ページ右側の「Clone or download」ボタンを押下、「Download ZIP」ボタンを押下してリポジトリのZIPファイルをダウンロードし、適当なディレクトリに展開してください。
+git clone 出来ない場合は、[リポジトリのページ](https://github.com/sumihiro3/hands-on-line-pay-v3-kintone.git)にアクセスして、ページ右側の「Clone or download」ボタンを押下、「Download ZIP」ボタンを押下してリポジトリのZIPファイルをダウンロードし、適当なディレクトリに展開してください。
 
 ![DownloadGitZip](images/DownloadGitZip.png)
 
