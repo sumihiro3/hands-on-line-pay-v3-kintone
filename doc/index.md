@@ -10,7 +10,7 @@ id: dist
 
 ---
 
-# LINE Pay v3 ハンズオン資料 [Version. 2019.11.22]
+# LINE Pay v3 ハンズオン資料 [Version. 2019.11.25]
 
 ## 1-1. LINE Pay とは
 
@@ -115,6 +115,17 @@ Web Interface                 http://127.0.0.1:4040
 Forwarding                    http://xxxxxx.ngrok.io -> http://localhost:5000
 Forwarding                    https://xxxxxx.ngrok.io -> http://localhost:5000
 ```
+
+### 4-2. ngrok をインストールしていない方
+
+```bash
+$ npm install –g ngrok
+```
+
+### 4-3. ngrok をインストールできない方（参考資料）
+
+[【備忘録】npm -g install に失敗する](http://bit.ly/35jeT6A)
+
 
 ## チャネルの作成
 
@@ -327,25 +338,89 @@ Bot の画面に表示するメニュー（リッチメニュー）の表示設�
 LINE アプリでBot を表示すると、画面下にリッチメニューが表示されます
 
 
+## kintone アプリの設定
+
+### 9-1. アプリテンプレートをインストール
+
+kintone にログイン
+
+各自で取得した開発者ライセンスにログイン用URLが記載されています。
+
+```
+例）
+https://xxxxxx.cybozu.com/login
+```
+
+画面右側の「アプリ」横にある＋ボタンを押下する
+![kintone アプリ作成](images/KintoneAppInstall01.png)
+
+あたらしくアプリを作るの下にある「テンプレートファイルを読み込んで作成」を選択する
+![kintone アプリ作成](images/KintoneAppInstall02.png)
+
+参照ボタンを押下、アプリテンプレート（data/HandsOnPayBotApps.zip）を選択し、「アプリ作成」ボタンを押下してアプリテンプレートを読み込む
+![kintone アプリ作成](images/KintoneAppInstall03.png)
+
+kintone ポータル画面に戻りアプリが2つ作成されていることを確認する
+
+- HandsOnPayBot 決済情報
+- HandsOnPayBot 注文情報
+
+![kintone アプリ作成](images/KintoneAppInstall04.png)
+
+### 9-2. kintone アプリのAPIトークンを発行する
+
+アプリ「HandsOnPayBot 決済情報」を選択し、画面右側にある歯車ボタンを押下する
+![kintone アプリ作成](images/KintoneAppInstall05.png)
+
+設定タブを選択し、APIトークンリンクを押下する
+![kintone アプリ作成](images/KintoneAppInstall06.png)
+
+「生成」ボタンを押下してAPIトークンを発行し、アクセス権を付与する
+
+- レコード閲覧
+- レコード追加
+- レコード編集
+- レコード削除
+
+**発行したAPIトークンと、APP IDは控えておく（青枠部分を参照）**
+
+**「保存」ボタン押下を忘れずに！**
+
+![kintone アプリ作成](images/KintoneAppInstall07.png)
+
+「アプリ更新」ボタンを押下して、APIトークン発行を完了
+![kintone アプリ作成](images/KintoneAppInstall08.png)
+
+**同じ手順をアプリ「HandsOnPayBot 注文情報」にも行う**
+
 ## 実装と実行
 
-### 9-1. プログラムに必要なモジュールをインストール
+### 10-1. プログラムに必要なモジュールをインストール
 
 ```bash
 $ npm install
 ```
 
-### 9-2. メモしておいた設定を、設定ファイルに記入する
+### 10-2. メモしておいた設定を、設定ファイルに記入する
 
 **.env_sample ファイルを.env にリネーム** し、.env ファイルに設定を記入する
 
 ```
+# LINE Pay API
 LINE_PAY_CHANNEL_ID=XXXXXXX
 LINE_PAY_CHANNEL_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 LINE_PAY_USE_CHECKOUT=true
+# LINE Messaging API
 LINE_BOT_CHANNEL_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 LINE_BOT_ACCESS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# ngrok
 APP_HOST_NAME=xxxxxxxx.ngrok.io
+# kintone
+KINTONE_DOMAIN_NAME=xxxxx.cybozu.com
+KINTONE_TRANSACTION_APP_API_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+KINTONE_TRANSACTION_APP_ID=X
+KINTONE_ORDER_ITEM_APP_API_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+KINTONE_ORDER_ITEM_APP_ID=X
 ```
 
 - LINE_PAY_CHANNEL_ID
@@ -361,8 +436,18 @@ LINE_PAY_USE_CHECKOUT
     - LINE Bot のアクセストークン
 - APP_HOST_NAME
     - ngrok のURL
+- KINTONE_DOMAIN_NAME
+    - kintone 開発者ライセンス発行時に割り当てられたkintone のドメイン・サブドメイン
+- KINTONE_TRANSACTION_APP_API_TOKEN
+    - 「HandsOnPayBot 決済情報」アプリのAPIトークン
+- KINTONE_TRANSACTION_APP_ID
+    - 「HandsOnPayBot 決済情報」アプリのAPP ID
+- KINTONE_ORDER_ITEM_APP_API_TOKEN
+    - 「HandsOnPayBot 注文情報」アプリのAPIトークン
+- KINTONE_ORDER_ITEM_APP_ID=X
+    - 「HandsOnPayBot 注文情報」アプリのAPP ID
 
-### 9-3. プログラムを起動
+### 10-3. プログラムを起動
 
 ターミナルまたはコマンドプロンプトにて、サンプルプログラムをclone （または展開）したディレクトリに移動する。
 
@@ -381,14 +466,14 @@ $ npm run start
 
 ## Profile+ の設定
 
-### 10-1. LINE Profile+ とは
+### 11-1. LINE Profile+ とは
 
 あらかじめLINE に登録しておいたプロフィール情報を外部のサイトやLINE の関連サイトで利用できるサービスのこと。
 LINE Pay のCheckout では、配送先を指定する際に利用できます。
 
 個々のサービスでの登録ではなく、LINE Checkout などを利用したサービスで共通して利用できる情報となるので、煩わしい入力が不要となります。
 
-### 10-2. LINE Profile+ の設定方法
+### 11-2. LINE Profile+ の設定方法
 
 LINE アプリの「ホーム」→「設定（歯車アイコン）」→「プロフィール」→「LINE Profile+」と遷移すると設定画面が表示されます。
 
@@ -404,7 +489,7 @@ LINE アプリの「ホーム」→「設定（歯車アイコン）」→「プ
 
 ## BotでLINE Pay を試してみよう
 
-### 11-1. 商品を選択する
+### 12-1. 商品を選択する
 
 LINE アプリで作成したBot のトーク画面を開く
 
@@ -420,7 +505,7 @@ LINE アプリで作成したBot のトーク画面を開く
 
 *複数の商品をカートに投入し、まとめて決済することもできる*
 
-### 11-2. LINE Pay 決済を体験
+### 12-2. LINE Pay 決済を体験
 
 カートにある「レジに進む」ボタンを押下すると決済が始まる
 
@@ -465,3 +550,18 @@ LINE Pay の決済画面では選択した商品が表示される
 承認実行（confirm API）を行うと決済が完了し、トーク画面へメッセージを送信します（Push API）
 
 ![決済完了](images/Bot11.png)
+
+### 12-3. 注文情報・決済情報をkintone で確認する
+kintone アプリに注文情報と決済情報がデータ登録されています。
+ユーザー別売上グラフや、商品別売上グラフなども閲覧できます。
+
+
+## おまけ
+サンプルデータを投入するプログラムを用意しています。
+いくつかのバリエーションのあるサンプルデータをkintone へ投入することで、kintone のグラフなどがそれっぽくなります。
+
+### 13-1. 注文情報・決済情報のサンプルデータをkintone へ登録する
+
+```bash
+$ node sample_data_loader.js
+```
