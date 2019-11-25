@@ -246,7 +246,7 @@ LINEアプリへのQRコードをLINEアプリで読み込んで友だち登録�
 ```bash
 $ mkdir ~/line-pay-kintone-hands-on && cd ~/line-pay-kintone-hands-on
 $ git clone https://github.com/sumihiro3/hands-on-line-pay-v3-kintone.git
-$ cd line-pay-kintone-hands-on
+$ cd hands-on-line-pay-v3-kintone
 ```
 
 #### Windows
@@ -255,7 +255,7 @@ $ cd line-pay-kintone-hands-on
 > mkdir c:¥tmp¥line-pay-kintone-hands-on
 > cd c:¥tmp¥line-pay-kintone-hands-on
 > git clone https://github.com/sumihiro3/hands-on-line-pay-v3-kintone.git
-> cd line-pay-kintone-hands-on
+> cd hands-on-line-pay-v3-kintone
 ```
 
 #### git clone 出来ない場合はリポジトリ内容をZIPファイルでダウンロード
