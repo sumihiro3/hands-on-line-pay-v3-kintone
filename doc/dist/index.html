@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>LINE Pay ハンズオン資料 [Version. 2019.11.03]</title>
+  <title>LINE Pay v3 ハンズオン資料 [Version. 2019.11.25]</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="dist"
-                  title="LINE Pay ハンズオン資料 [Version. 2019.11.03]"
+                  title="LINE Pay v3 ハンズオン資料 [Version. 2019.11.25]"
                   environment="web"
                   feedback-link="">
     
@@ -90,6 +90,11 @@ Web Interface                 http://127.0.0.1:4040
 Forwarding                    http://xxxxxx.ngrok.io -&gt; http://localhost:5000
 Forwarding                    https://xxxxxx.ngrok.io -&gt; http://localhost:5000
 </code></pre>
+<h2 is-upgraded>4-2. ngrok をインストールしていない方</h2>
+<pre><code>$ npm install –g ngrok
+</code></pre>
+<h2 is-upgraded>4-3. ngrok をインストールできない方（参考資料）</h2>
+<p><a href="http://bit.ly/35jeT6A" target="_blank">【備忘録】npm -g install に失敗する</a></p>
 
 
       </google-codelab-step>
@@ -179,64 +184,8 @@ Forwarding                    https://xxxxxx.ngrok.io -&gt; http://localhost:500
 
       </google-codelab-step>
     
-      <google-codelab-step label="リッチメニューの設定" duration="0">
-        <h2 is-upgraded>7-1. リッチメニューを作成する</h2>
-<p>Bot の画面に表示するメニュー（リッチメニュー）の表示設定をします</p>
-<p>公式アカウントマネージャーの「ホーム」タブ→「リッチメニュー」を選択し、リッチメニューの「作成」ボタンを押下する</p>
-<p class="image-container"><img alt="リッチメニュー" src="img/7c30a2057623ccac.png"></p>
-<h2 is-upgraded>7-2. リッチメニューの表示設定</h2>
-<p>リッチメニューのタイトルと、表示期間を入力する</p>
-<p>入力例）</p>
-<ul>
-<li>タイトル<br><br><ul>
-<li>リッチメニュー</li>
-</ul>
-</li>
-<li>表示期間<br><br><ul>
-<li>2019/11/01  00:00</li>
-<li>2021/01/01  00:00</li>
-</ul>
-</li>
-</ul>
-<p class="image-container"><img alt="リッチメニュー" src="img/75f1abd9aa85b071.png"></p>
-<h2 is-upgraded>7-3. リッチメニューのテンプレート設定</h2>
-<p>リッチメニューの大きさと、ボタン領域・数を設定する</p>
-<p class="image-container"><img alt="リッチメニュー" src="img/56adf94258774875.png"></p>
-<p>コンテンツ設定 の左側にある「テンプレートを選択」を押下して、リッチメニューのテンプレートタイプを選択する</p>
-<p class="image-container"><img alt="リッチメニュー" src="img/1d84d92b65f19bb5.png"></p>
-<p>今回は右下にある、サイズ小で、ボタン領域が２つあるテンプレートを選択する</p>
-<h2 is-upgraded>7-5. リッチメニューのアクション設定</h2>
-<p>ユーザーがリッチメニューを押下した際の挙動を設定する</p>
-<p>今回は、各領域選択時にテキストメッセージが送信されるように設定する</p>
-<p>左側の領域選択時に「アイテム」、右側領域選択時に「カート」というテキストメッセージが送信されるよう、下記のように設定する</p>
-<ul>
-<li>領域A<br><br><ul>
-<li>タイプ：テキスト</li>
-<li>テキスト：アイテム</li>
-</ul>
-</li>
-<li>領域B<br><br><ul>
-<li>タイプ：テキスト</li>
-<li>テキスト：カート</li>
-</ul>
-</li>
-</ul>
-<p class="image-container"><img alt="リッチメニュー" src="img/56adf94258774875.png"></p>
-<h2 is-upgraded>7-6. リッチメニューの背景画像設定</h2>
-<p>リッチメニュー領域に表示させる画像を設定する</p>
-<p>コンテンツ設定 の左側にある「背景画像をアップロード」を押下して、画像をアップロードする</p>
-<p class="image-container"><img alt="リッチメニュー" src="img/f71529f6dbe39dab.png"></p>
-<p>リッチメニュー用の画像は、images/RichMenu.png を利用する</p>
-<h2 is-upgraded>7-7. リッチメニューの保存</h2>
-<p>すべて設定できていれば、画面したの「保存」ボタンが有効化されるので、ボタンを押下して設定を保存する</p>
-<p class="image-container"><img alt="リッチメニュー" src="img/3110f3621c02ea21.png"></p>
-<p>LINE アプリでBot を表示すると、画面下にリッチメニューが表示されます</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="実装と実行" duration="0">
-        <h2 is-upgraded>8-1. git clone</h2>
+      <google-codelab-step label="サンプルプログラムのダウンロード" duration="0">
+        <h2 is-upgraded>7-1. git clone</h2>
 <p>ハンズオン用に適当なディレクトリを作成して、そこへソースコードをgit clone する</p>
 <p>クローンできたら、ダウンロードしたディレクトリをVisualStucioCode で開いておく</p>
 <h3 is-upgraded>Mac</h3>
@@ -253,16 +202,122 @@ $ cd hands-on-line-pay-v3
 <h3 is-upgraded>git clone 出来ない場合はリポジトリ内容をZIPファイルでダウンロード</h3>
 <p>git clone 出来ない場合は、<a href="https://github.com/sumihiro3/hands-on-line-pay-v3.git" target="_blank">リポジトリのページ</a>にアクセスして、ページ右側の「Clone or download」ボタンを押下、「Download ZIP」ボタンを押下してリポジトリのZIPファイルをダウンロードし、適当なディレクトリに展開してください。</p>
 <p class="image-container"><img alt="DownloadGitZip" src="img/ba3358c2aa381667.png"></p>
-<h2 is-upgraded>8-2. プログラムに必要なモジュールをインストール</h2>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リッチメニューの設定" duration="0">
+        <h2 is-upgraded>8-1. リッチメニューを作成する</h2>
+<p>Bot の画面に表示するメニュー（リッチメニュー）の表示設定をします</p>
+<p>公式アカウントマネージャーの「ホーム」タブ→「リッチメニュー」を選択し、リッチメニューの「作成」ボタンを押下する</p>
+<p class="image-container"><img alt="リッチメニュー" src="img/7c30a2057623ccac.png"></p>
+<h2 is-upgraded>8-2. リッチメニューの表示設定</h2>
+<p>リッチメニューのタイトルと、表示期間を入力する</p>
+<p>入力例）</p>
+<ul>
+<li>タイトル<br><br><ul>
+<li>リッチメニュー</li>
+</ul>
+</li>
+<li>表示期間<br><br><ul>
+<li>2019/11/01  00:00</li>
+<li>2021/01/01  00:00</li>
+</ul>
+</li>
+</ul>
+<p class="image-container"><img alt="リッチメニュー" src="img/75f1abd9aa85b071.png"></p>
+<h2 is-upgraded>8-3. リッチメニューのテンプレート設定</h2>
+<p>リッチメニューの大きさと、ボタン領域・数を設定する</p>
+<p class="image-container"><img alt="リッチメニュー" src="img/56adf94258774875.png"></p>
+<p>コンテンツ設定 の左側にある「テンプレートを選択」を押下して、リッチメニューのテンプレートタイプを選択する</p>
+<p class="image-container"><img alt="リッチメニュー" src="img/1d84d92b65f19bb5.png"></p>
+<p>今回は右下にある、サイズ小で、ボタン領域が２つあるテンプレートを選択する</p>
+<h2 is-upgraded>8-5. リッチメニューのアクション設定</h2>
+<p>ユーザーがリッチメニューを押下した際の挙動を設定する</p>
+<p>今回は、各領域選択時にテキストメッセージが送信されるように設定する</p>
+<p>左側の領域選択時に「アイテム」、右側領域選択時に「カート」というテキストメッセージが送信されるよう、下記のように設定する</p>
+<ul>
+<li>領域A<br><br><ul>
+<li>タイプ：テキスト</li>
+<li>テキスト：アイテム</li>
+</ul>
+</li>
+<li>領域B<br><br><ul>
+<li>タイプ：テキスト</li>
+<li>テキスト：カート</li>
+</ul>
+</li>
+</ul>
+<p class="image-container"><img alt="リッチメニュー" src="img/56adf94258774875.png"></p>
+<h2 is-upgraded>8-6. リッチメニューの背景画像設定</h2>
+<p>リッチメニュー領域に表示させる画像を設定する</p>
+<p>コンテンツ設定 の左側にある「背景画像をアップロード」を押下して、画像をアップロードする</p>
+<p class="image-container"><img alt="リッチメニュー" src="img/f71529f6dbe39dab.png"></p>
+<p>リッチメニュー用の画像は、サンプルプログラムの images/RichMenu.png を利用する</p>
+<h2 is-upgraded>8-7. リッチメニューの保存</h2>
+<p>すべて設定できていれば、画面したの「保存」ボタンが有効化されるので、ボタンを押下して設定を保存する</p>
+<p class="image-container"><img alt="リッチメニュー" src="img/3110f3621c02ea21.png"></p>
+<p>LINE アプリでBot を表示すると、画面下にリッチメニューが表示されます</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="kintone アプリの設定" duration="0">
+        <h2 is-upgraded>9-1. アプリテンプレートをインストール</h2>
+<p>kintone にログイン</p>
+<p>各自で取得した開発者ライセンスにログイン用URLが記載されています。</p>
+<pre><code>例）
+https://xxxxxx.cybozu.com/login
+</code></pre>
+<p>画面右側の「アプリ」横にある＋ボタンを押下する<br><img alt="kintone アプリ作成" src="img/b0f1915f360b9b9b.png"></p>
+<p>あたらしくアプリを作るの下にある「テンプレートファイルを読み込んで作成」を選択する<br><img alt="kintone アプリ作成" src="img/f6c7c3ab2f6a45b2.png"></p>
+<p>参照ボタンを押下、アプリテンプレート（data/HandsOnPayBotApps.zip）を選択し、「アプリ作成」ボタンを押下してアプリテンプレートを読み込む<br><img alt="kintone アプリ作成" src="img/7ee6b569de8bf3d6.png"></p>
+<p>kintone ポータル画面に戻りアプリが2つ作成されていることを確認する</p>
+<ul>
+<li>HandsOnPayBot 決済情報</li>
+<li>HandsOnPayBot 注文情報</li>
+</ul>
+<p class="image-container"><img alt="kintone アプリ作成" src="img/3c5f75d9a482ab74.png"></p>
+<h2 is-upgraded>9-2. kintone アプリのAPIトークンを発行する</h2>
+<p>アプリ「HandsOnPayBot 決済情報」を選択し、画面右側にある歯車ボタンを押下する<br><img alt="kintone アプリ作成" src="img/8f2aa80c99939d9e.png"></p>
+<p>設定タブを選択し、APIトークンリンクを押下する<br><img alt="kintone アプリ作成" src="img/7dbd53a9e6f1509f.png"></p>
+<p>「生成」ボタンを押下してAPIトークンを発行し、アクセス権を付与する</p>
+<ul>
+<li>レコード閲覧</li>
+<li>レコード追加</li>
+<li>レコード編集</li>
+<li>レコード削除</li>
+</ul>
+<p><strong>発行したAPIトークンと、APP IDは控えておく（青枠部分を参照）</strong></p>
+<p><strong>「保存」ボタン押下を忘れずに！</strong></p>
+<p class="image-container"><img alt="kintone アプリ作成" src="img/15b6099c4957ffb0.png"></p>
+<p>「アプリ更新」ボタンを押下して、APIトークン発行を完了<br><img alt="kintone アプリ作成" src="img/daa3ae894fe69afa.png"></p>
+<p><strong>同じ手順をアプリ「HandsOnPayBot 注文情報」にも行う</strong></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="実装と実行" duration="0">
+        <h2 is-upgraded>10-1. プログラムに必要なモジュールをインストール</h2>
 <pre><code>$ npm install
 </code></pre>
-<h2 is-upgraded>8-3. メモしておいた設定を、設定ファイルに記入する</h2>
+<h2 is-upgraded>10-2. メモしておいた設定を、設定ファイルに記入する</h2>
 <p><strong>.env_sample ファイルを.env にリネーム</strong> し、.env ファイルに設定を記入する</p>
-<pre><code>LINE_PAY_CHANNEL_ID=XXXXXXX
+<pre><code># LINE Pay API
+LINE_PAY_CHANNEL_ID=XXXXXXX
 LINE_PAY_CHANNEL_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+LINE_PAY_USE_CHECKOUT=true
+# LINE Messaging API
 LINE_BOT_CHANNEL_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 LINE_BOT_ACCESS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# ngrok
 APP_HOST_NAME=xxxxxxxx.ngrok.io
+# kintone
+KINTONE_DOMAIN_NAME=xxxxx.cybozu.com
+KINTONE_TRANSACTION_APP_API_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+KINTONE_TRANSACTION_APP_ID=X
+KINTONE_ORDER_ITEM_APP_API_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+KINTONE_ORDER_ITEM_APP_ID=X
 </code></pre>
 <ul>
 <li>LINE_PAY_CHANNEL_ID<br><br><ul>
@@ -270,11 +325,7 @@ APP_HOST_NAME=xxxxxxxx.ngrok.io
 </ul>
 </li>
 <li>LINE_PAY_CHANNEL_SECRET<br><br><ul>
-<li>LINE Pay のChannel Secret</li>
-</ul>
-</li>
-<li>LINE_PAY_CONFIRM_URL<br><br><ul>
-<li>https://XXXXXXXX.ngrok.io/pay/confirm<br>LINE_PAY_USE_CHECKOUT</li>
+<li>LINE Pay のChannel Secret<br>LINE_PAY_USE_CHECKOUT</li>
 <li>true<br><br><ul>
 <li><strong>LINE Pay 残高がない場合は false を指定してください</strong></li>
 </ul>
@@ -289,19 +340,48 @@ APP_HOST_NAME=xxxxxxxx.ngrok.io
 <li>LINE Bot のアクセストークン</li>
 </ul>
 </li>
+<li>APP_HOST_NAME<br><br><ul>
+<li>ngrok のURL</li>
 </ul>
-<h2 is-upgraded>8-4. プログラムを起動</h2>
+</li>
+<li>KINTONE_DOMAIN_NAME<br><br><ul>
+<li>kintone 開発者ライセンス発行時に割り当てられたkintone のドメイン・サブドメイン</li>
+</ul>
+</li>
+<li>KINTONE_TRANSACTION_APP_API_TOKEN<br><br><ul>
+<li>「HandsOnPayBot 決済情報」アプリのAPIトークン</li>
+</ul>
+</li>
+<li>KINTONE_TRANSACTION_APP_ID<br><br><ul>
+<li>「HandsOnPayBot 決済情報」アプリのAPP ID</li>
+</ul>
+</li>
+<li>KINTONE_ORDER_ITEM_APP_API_TOKEN<br><br><ul>
+<li>「HandsOnPayBot 注文情報」アプリのAPIトークン</li>
+</ul>
+</li>
+<li>KINTONE_ORDER_ITEM_APP_ID=X<br><br><ul>
+<li>「HandsOnPayBot 注文情報」アプリのAPP ID</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>10-3. プログラムを起動</h2>
+<p>ターミナルまたはコマンドプロンプトにて、サンプルプログラムをclone （または展開）したディレクトリに移動する。</p>
+<h3 is-upgraded>Mac</h3>
 <pre><code>$ npm run start
+</code></pre>
+<h3 is-upgraded>Windows</h3>
+<pre><code>&gt; npm run windowsDebug
 </code></pre>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Profile&#43; の設定" duration="0">
-        <h2 is-upgraded>9-1. LINE Profile+ とは</h2>
+        <h2 is-upgraded>11-1. LINE Profile+ とは</h2>
 <p>あらかじめLINE に登録しておいたプロフィール情報を外部のサイトやLINE の関連サイトで利用できるサービスのこと。<br>LINE Pay のCheckout では、配送先を指定する際に利用できます。</p>
 <p>個々のサービスでの登録ではなく、LINE Checkout などを利用したサービスで共通して利用できる情報となるので、煩わしい入力が不要となります。</p>
-<h2 is-upgraded>9-2. LINE Profile+ の設定方法</h2>
+<h2 is-upgraded>11-2. LINE Profile+ の設定方法</h2>
 <p>LINE アプリの「ホーム」→「設定（歯車アイコン）」→「プロフィール」→「LINE Profile+」と遷移すると設定画面が表示されます。</p>
 <p class="image-container"><img alt="LINE Profile+" src="img/f0d09b6ff2c2c615.png"></p>
 <p>上記のLINE Profile+ 画面が表示されるので「はじめる」をタップして、必要な情報を入力します。</p>
@@ -315,18 +395,18 @@ APP_HOST_NAME=xxxxxxxx.ngrok.io
       </google-codelab-step>
     
       <google-codelab-step label="BotでLINE Pay を試してみよう" duration="0">
-        <h2 is-upgraded>10-1. 商品を選択する</h2>
+        <h2 is-upgraded>12-1. 商品を選択する</h2>
 <p>LINE アプリで作成したBot のトーク画面を開く</p>
 <p class="image-container"><img alt="リッチメニュー" src="img/44ba7a809ce622e.png"></p>
 <p>画面下部のリッチメニューで、左側の「商品を見る」を選択すると商品一覧が表示される</p>
 <p class="image-container"><img alt="商品一覧" src="img/a4d498360a62e3a2.png"></p>
 <p>任意の商品の個数を選択すると、カートに投入される</p>
 <p class="image-container"><img alt="カート" src="img/71c561cabd27e698.png"></p>
-<p><em>複数の商品をカートに投入し、まとめて決済することも可能です</em></p>
-<h2 is-upgraded>10-2. LINE Pay 決済を体験</h2>
-<p>カートにある「LINE Pay で支払う」ボタンを押下すると決済が始まる</p>
+<p><em>複数の商品をカートに投入し、まとめて決済することもできる</em></p>
+<h2 is-upgraded>12-2. LINE Pay 決済を体験</h2>
+<p>カートにある「レジに進む」ボタンを押下すると決済が始まる</p>
 <p class="image-container"><img alt="カート" src="img/71c561cabd27e698.png"></p>
-<p>このボタンを押下するとLINE Pay の決済リクエストAPI が実行される</p>
+<p>「レジに進む」ボタンを押下するとLINE Pay の決済リクエストAPI が実行される</p>
 <p>レジが表示されるので、「LINE Pay で決済」ボタンを押下すると、決済リクエストAPI で返された「決済URL（paymentUrl）」のページ（LINE Pay の決済画面）にアクセスする</p>
 <p class="image-container"><img alt="レジ" src="img/4e02b22c9f18f80c.png"></p>
 <p>LINE Pay の決済画面では選択した商品が表示される</p>
@@ -346,6 +426,17 @@ APP_HOST_NAME=xxxxxxxx.ngrok.io
 <p>決済が完了すると、サーバーサイドのConfirm URL へWebhook が送信される</p>
 <p>承認実行（confirm API）を行うと決済が完了し、トーク画面へメッセージを送信します（Push API）</p>
 <p class="image-container"><img alt="決済完了" src="img/116199fdb3f798a4.png"></p>
+<h2 is-upgraded>12-3. 注文情報・決済情報をkintone で確認する</h2>
+<p>kintone アプリに注文情報と決済情報がデータ登録されています。<br>ユーザー別売上グラフや、商品別売上グラフなども閲覧できます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="おまけ" duration="0">
+        <p>サンプルデータを投入するプログラムを用意しています。<br>いくつかのバリエーションのあるサンプルデータをkintone へ投入することで、kintone のグラフなどがそれっぽくなります。</p>
+<h2 is-upgraded>13-1. 注文情報・決済情報のサンプルデータをkintone へ登録する</h2>
+<pre><code>$ node sample_data_loader.js
+</code></pre>
 
 
       </google-codelab-step>
